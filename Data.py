@@ -40,7 +40,7 @@ def parse_G2B():
        
         workList.extend(searchTask('공사', '강원', '조경시설물설치공사업', '강원도 횡성군', tempStart, tempEnd))
 
-        if check or count != 0: # 수정해야함.!
+        if check or count == 1: # 수정해야함.!
             break
 
 
@@ -50,7 +50,6 @@ def parse_G2B():
 
         for result in workList:
             driver.get(result[2])
-    
             driver.find_element_by_xpath('//*[@id="container"]/div[24]/table/tbody/tr/td[5]/a/span').click()
             elem = driver.find_element_by_class_name('results')
             div_list = elem.find_elements_by_tag_name('div')
