@@ -40,7 +40,7 @@ def parse_G2B():
        
         workList.extend(searchTask('공사', '강원', '조경시설물설치공사업', '강원도 횡성군', tempStart, tempEnd))
 
-        if check or count == 1: # 수정해야함.!
+        if check: # 수정해야함.!
             break
 
 
@@ -58,8 +58,21 @@ def parse_G2B():
                 biddingResult.append(div.text)
 
             BiddingList.append([biddingResult[i * 9:(i + 1) * 9] for i in range((len(biddingResult) + 9 - 1)// 9)])
+        ####
+        df = pd.DataFrame(columns=['공고번호-차수', '순위', '사업자 등록번호', '업체명', '대표자명', '입찰금액(원)', '투찰률(%)', '추첨 번호', '투찰일시', '비고'])
+        count = 0
 
-        return workList, BiddingList
+        for idx in range(len(BiddingList)):
+            for j in BiddingList[idx]:
+                if len(j) == 9:
+                    temp = deque(j)
+                    temp.appendleft(workList[idx][1])
+                    df.loc[count] = list(temp)
+                    count += 1
+
+
+        return df
+        #return workList, BiddingList
     except Exception as e:
         # 위 코드에서 에러가 발생한 경우 출력
         print(e)
@@ -67,15 +80,4 @@ def parse_G2B():
         # 에러와 관계없이 실행되고, 크롬 드라이버를 종료
         driver.quit()
 
-workList, BiddingList = parse_G2B()
-# data Frame 생성. 
-df = pd.DataFrame(columns=['공고번호-차수', '순위', '사업자 등록번호', '업체명', '대표자명', '입찰금액(원)', '투찰률(%)', '추첨 번호', '투찰일시', '비고'])
-count = 0
-for idx in range(len(BiddingList)):
-    for j in BiddingList[idx]:
-        temp = deque(j)
-        temp.appendleft(workList[idx][1])
-        df.loc[count] = list(temp)
-        count += 1
-
-print(df)
+print(parse_G2B())
