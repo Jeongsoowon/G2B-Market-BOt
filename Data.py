@@ -10,6 +10,9 @@ from search import searchTask
 import pandas as pd
 from collections import deque
 
+# csv
+import csv
+
 def parse_G2B():
     # 연도, 월, 일 입력 // '일' 은 반드시 같게 해주세요!
     start = [2020, 6, 14]
