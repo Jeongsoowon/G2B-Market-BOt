@@ -1,6 +1,12 @@
 """
     나라장터 검색을 위한 html url 생성 후 목록 반환
 """
+
+
+def tenderOpening(resultList, number):
+    find_work = resultList['공고번호-차수'] == number
+    return resultList[find_work]
+
 # 날짜 String으로 변환
 def makeString(arg1):
     arg1[0] = str(arg1[0])

@@ -3,20 +3,22 @@
     입찰 결과까지 저장함. (BiddingList)
 """
 
+from urllib import parse
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from search import searchTask
 import pandas as pd
 from collections import deque
+from bs4 import BeautifulSoup
 
 # csv
 import csv
-
-def parse_G2B():
-    # 연도, 월, 일 입력 // '일' 은 반드시 같게 해주세요!
-    start = [2020, 6, 14]
-    end = [2021, 6, 14]
+# 연도, 월, 일 입력 // '일' 은 반드시 같게 해주세요!
+def parse_G2B(start, end):
+    
+    #start = [2020, 6, 14]
+    #end = [2021, 6, 14]
     check, count = False, 0
     workList = []
     while True:
@@ -45,7 +47,7 @@ def parse_G2B():
 
         if check: # 수정해야함.!
             break
-
+        
 
     try:
         driver = webdriver.Chrome('/Users/waterpurifier/Downloads/chromedriver')
@@ -73,8 +75,16 @@ def parse_G2B():
                     df.loc[count] = list(temp)
                     count += 1
 
+        # 업무, 공고번호-차수, 분류, 공고명, 공고기관, 수요기관, 계약방법, 입력일시(입찰마감일시), 바로가기
+        work = pd.DataFrame(columns=['업무', '공고번호-차수', '분류', '공고명', '공고기관', '수요기관', '계약방법', '입력일시(입찰마감일시)', '투찰' ,'바로가기'])
+        count = 0
+        for w in workList:
+            t = w[:2] + w[3:5] + w[6:10] + w[11:12]
+            t.append(w[2])
+            work.loc[count] = t
+            count += 1
 
-        return df
+        return df, work
         #return workList, BiddingList
     except Exception as e:
         # 위 코드에서 에러가 발생한 경우 출력
@@ -82,5 +92,3 @@ def parse_G2B():
     finally:
         # 에러와 관계없이 실행되고, 크롬 드라이버를 종료
         driver.quit()
-
-print(parse_G2B())

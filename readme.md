@@ -26,6 +26,6 @@ workList 로 공사목록을 확인 할 수 있다. <br>
 
 <br> <br> <br>
 
-# Django 시작! 
-<br> https://wikidocs.net/91423 참고
-<br> 21.06.18 Django 활용하기 위해 예제를 통해 배우려고함 ! 
+# 데이터 분석
+<br> 21.06.19 Analysis.ipynb
+<br> 이제 공고번호-차수 를 통해 원하는 입찰의 개찰결과를 볼 수 있다.
