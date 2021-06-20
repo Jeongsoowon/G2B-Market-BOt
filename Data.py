@@ -15,7 +15,7 @@ from bs4 import BeautifulSoup
 # csv
 import csv
 # 연도, 월, 일 입력 // '일' 은 반드시 같게 해주세요!
-def parse_G2B(start, end):
+def parse_G2B(kind, start, end):
     
     #start = [2020, 6, 14]
     #end = [2021, 6, 14]
@@ -43,7 +43,7 @@ def parse_G2B(start, end):
                 tempEnd[1] = end[1]
                 check = True
        
-        workList.extend(searchTask('공사', '강원', '조경시설물설치공사업', '강원도 횡성군', tempStart, tempEnd))
+        workList.extend(searchTask('공사', '강원', kind, '강원도 횡성군', tempStart, tempEnd))
 
         if check: # 수정해야함.!
             break
@@ -55,16 +55,20 @@ def parse_G2B(start, end):
 
         for result in workList:
             driver.get(result[2])
-            driver.find_element_by_xpath('//*[@id="container"]/div[24]/table/tbody/tr/td[5]/a/span').click()
-            elem = driver.find_element_by_class_name('results')
-            div_list = elem.find_elements_by_tag_name('div')
-            biddingResult = []
-            for div in div_list:
-                biddingResult.append(div.text)
+            try:
+                click = driver.find_element_by_xpath('//*[@id="container"]/div[24]/table/tbody/tr/td[5]/a/span')
+                click.click()
+                elem = driver.find_element_by_class_name('results')
+                div_list = elem.find_elements_by_tag_name('div')
+                biddingResult = []
+                for div in div_list:
+                    biddingResult.append(div.text)
 
-            BiddingList.append([biddingResult[i * 9:(i + 1) * 9] for i in range((len(biddingResult) + 9 - 1)// 9)])
+                BiddingList.append([biddingResult[i * 9:(i + 1) * 9] for i in range((len(biddingResult) + 9 - 1)// 9)])
+            except:
+                pass
         ####
-        df = pd.DataFrame(columns=['공고번호-차수', '순위', '사업자 등록번호', '업체명', '대표자명', '입찰금액(원)', '투찰률(%)', '추첨 번호', '투찰일시', '비고'])
+        df = pd.DataFrame(columns=['공고번호', '순위', '사업자 등록번호', '업체명', '대표자명', '입찰금액', '투찰률', '추첨 번호', '투찰일시', '비고'])
         count = 0
 
         for idx in range(len(BiddingList)):
@@ -76,7 +80,7 @@ def parse_G2B(start, end):
                     count += 1
 
         # 업무, 공고번호-차수, 분류, 공고명, 공고기관, 수요기관, 계약방법, 입력일시(입찰마감일시), 바로가기
-        work = pd.DataFrame(columns=['업무', '공고번호-차수', '분류', '공고명', '공고기관', '수요기관', '계약방법', '입력일시(입찰마감일시)', '투찰' ,'바로가기'])
+        work = pd.DataFrame(columns=['업무', '공고번호', '분류', '공고명', '공고기관', '수요기관', '계약방법', '입력일시', '투찰' ,'바로가기'])
         count = 0
         for w in workList:
             t = w[:2] + w[3:5] + w[6:10] + w[11:12]

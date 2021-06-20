@@ -4,7 +4,7 @@
 
 
 def tenderOpening(resultList, number):
-    find_work = resultList['공고번호-차수'] == number
+    find_work = resultList['공고번호'] == number
     return resultList[find_work]
 
 # 날짜 String으로 변환
