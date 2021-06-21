@@ -29,5 +29,5 @@ workList 로 공사목록을 확인 할 수 있다. <br>
 # 데이터 분석
 <br> 21.06.19 Analysis.ipynb
 <br> 이제 공고번호-차수 를 통해 원하는 입찰의 개찰결과를 볼 수 있다.
-<br> 21.06.20 MySQL.ipynb
-<br> MySQL에 저장하였음. 
+<br> 21.06.21 MySQL.ipynb update
+<br> cron 사용하여 자동으로 업데이트 되게 하고싶음.

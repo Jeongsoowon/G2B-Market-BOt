@@ -15,7 +15,7 @@ from bs4 import BeautifulSoup
 # csv
 import csv
 # 연도, 월, 일 입력 // '일' 은 반드시 같게 해주세요!
-def parse_G2B(kind, start, end):
+def parse_G2B(kind, start, end, add):
     
     #start = [2020, 6, 14]
     #end = [2021, 6, 14]
@@ -24,8 +24,8 @@ def parse_G2B(kind, start, end):
     while True:
         if count == 0:
             tempStart = start
-            # 5개월 간격으로 검색.
-            tempEnd = [start[0], start[1] + 5, start[2]]
+            # add 개월 간격으로 검색.
+            tempEnd = [start[0], start[1] + add, start[2]]
             if tempEnd[1] > 12:
                 tempEnd[0] += 1
                 tempEnd[1] -= 12
@@ -33,7 +33,7 @@ def parse_G2B(kind, start, end):
         else:
             tempStart = [int(tempEnd[0]), int(tempEnd[1]), int(tempEnd[2])]
             print(tempEnd)
-            tempEnd = [tempStart[0], tempStart[1] + 5, tempStart[2]]
+            tempEnd = [tempStart[0], tempStart[1] + add, tempStart[2]]
             if tempEnd[1] > 12:
                 tempEnd[0] += 1
                 tempEnd[1] -= 12
@@ -50,6 +50,7 @@ def parse_G2B(kind, start, end):
         
 
     try:
+        
         driver = webdriver.Chrome('/Users/waterpurifier/Downloads/chromedriver')
         BiddingList = []
 
