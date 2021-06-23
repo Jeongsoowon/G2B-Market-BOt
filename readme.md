@@ -34,3 +34,6 @@ workList 로 공사목록을 확인 할 수 있다. <br>
 <br> 21.06.22 MySQL.ipynb update
 <br> 기초금액이 누락되어 [공고번호, 기초금액] table에 추가하였음.
 <br> 더 만들고 싶었으나,, Data.py 건들이다가 이상하게 되어버려서,,,, 고치는데만 시간다씀,,,,,, ㅠㅠ 
+<br> 21.06.23 MySQL.ipynb, Data.py, Analysis.ipynb, Analysis.py Update
+<br> biddingList에 치명적 오류발생,,, 공고번호가 맞지않는 상황이 생겨서 고치느라 오늘 하루 다씀,,,, 이래서 차분히 코딩하면서 오류가 없는지 하나하나 <br> 점검 했어야했는데,,
+<br> 여튼,, 고치진 못했고,, 기초금액이 필요한 상태였기에 biddingList 끝자락에 넣어줬다.. <br> Analysis.py 를 통해 Analysis를 진행할려고한다! 화이팅! 내일은 분석이라도 끝내자!

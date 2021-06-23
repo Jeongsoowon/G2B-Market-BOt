@@ -82,4 +82,3 @@ def searchTask(task, area, industry, myArea, start, end):
         # 에러와 관계없이 실행되고, 크롬 드라이버를 종료
         driver.quit()
     
-    
