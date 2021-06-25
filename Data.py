@@ -3,17 +3,13 @@
     입찰 결과까지 저장함. (BiddingList)
 """
 
-from urllib import parse
+
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
 from search import searchTask
 import pandas as pd
 from collections import deque
-from bs4 import BeautifulSoup
 
-# csv
-import csv
+
 # 연도, 월, 일 입력 // '일' 은 반드시 같게 해주세요!
 def parse_G2B(kind, start, end, add):
     

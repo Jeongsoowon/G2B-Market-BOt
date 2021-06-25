@@ -37,3 +37,9 @@ workList 로 공사목록을 확인 할 수 있다. <br>
 <br> 21.06.23 MySQL.ipynb, Data.py, Analysis.ipynb, Analysis.py Update
 <br> biddingList에 치명적 오류발생,,, 공고번호가 맞지않는 상황이 생겨서 고치느라 오늘 하루 다씀,,,, 이래서 차분히 코딩하면서 오류가 없는지 하나하나 <br> 점검 했어야했는데,,
 <br> 여튼,, 고치진 못했고,, 기초금액이 필요한 상태였기에 biddingList 끝자락에 넣어줬다.. <br> Analysis.py 를 통해 Analysis를 진행할려고한다! 화이팅! 내일은 분석이라도 끝내자!
+
+
+<br> 21.06.24 데이터 분석 얼추 끝남,... 다시해야하긴함..
+<br> 21.06.25 코드 정리중,,, ㅠㅠ 쓸데없는거 날리고 포기할건 포기하고,, 기록이라도 하자는 의미로 남겨둠(getData의 morePage변수) <br>
+<br> search.py -> getData Class로 이주완료 나머지 기능들도 getData로 옮길예정! 깔끔하게 코드를 다시짜는중!
+<br> 이거도 일기형식으로 썼는데 나중에는 좀더 정리하자! ㅎㅇㅌ~
