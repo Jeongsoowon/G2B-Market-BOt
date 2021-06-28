@@ -156,9 +156,14 @@ class getData:
 
             except Exception as e:
                 print(e)
-                
         driver.quit()
-        return bid
+        # 데이터프레임 형태로 저장
+        bidDf = pd.DataFrame(columns=['순위', '사업자 등록번호', '업체명', '대표자명', '입찰금액', '투찰률', '추첨 번호', '투찰일시', '비고'])
+        for idx, bids in enumerate(bid):
+            for b in bids:
+                bidDf.loc[idx] = b
+        
+        return bidDf
     
 """
 check, count = False, 0

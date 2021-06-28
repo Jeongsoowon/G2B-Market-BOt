@@ -25,8 +25,6 @@ myArea = 검색결과에서 특정 지역을 골라낼때 사용
 def searchTask(task, area, industry, myArea, start, end):
     # 크롬 브라우저를 띄우기 위해, 웹드라이버를 가져오기
     from selenium import webdriver
-    from selenium.webdriver.common.keys import Keys
-    from selenium.webdriver.support.ui import Select
     # 크롬 드라이버로 크롬을 실행한다.
     driver = webdriver.Chrome('/Users/waterpurifier/Downloads/chromedriver')
     try:
