@@ -131,7 +131,8 @@ class getData:
 
     # 개찰결과를 반환.
     def bidListBot(self, driver, workList):
-        bid = []
+        bid = dict()
+        #bidDf = pd.DataFrame(columns=['순위', '사업자 등록번호', '업체명', '대표자명', '입찰금액', '투찰률', '추첨 번호', '투찰일시', '비고', '공고번호'])
         for w in workList:
             try:
                 # workList의 url 열기
@@ -144,26 +145,29 @@ class getData:
                         re += 1
                 script = "javascript:toDetail('3', '" + w[1][:11] +"', '00', '0', '"+ str(re)  +"', '개찰완료');"
                 driver.execute_script(script)
-
+                # 공고번호 
+                temp = driver.find_element_by_xpath('//*[@id="rebid"]/div[2]/table/tbody/tr[1]/td[1]/div')
+                workNum = temp.text 
                 # 개찰결과 가져와 저장 
                 elem = driver.find_element_by_class_name('results')
                 div_list = elem.find_elements_by_tag_name('div')
                 bidResult = []
                 for div in div_list:
                     bidResult.append(div.text)
+                #bid.append([bidResult[i * 9:(i + 1) * 9] for i in range((len(bidResult) + 9 - 1)// 9)])
+                bid[workNum[:11]] = [bidResult[i * 9:(i + 1) * 9] for i in range((len(bidResult) + 9 - 1)// 9)]
                 
-                bid.append([bidResult[i * 9:(i + 1) * 9] for i in range((len(bidResult) + 9 - 1)// 9)])
-
+                    
             except Exception as e:
                 print(e)
         driver.quit()
         # 데이터프레임 형태로 저장
-        bidDf = pd.DataFrame(columns=['순위', '사업자 등록번호', '업체명', '대표자명', '입찰금액', '투찰률', '추첨 번호', '투찰일시', '비고'])
-        for idx, bids in enumerate(bid):
-            for b in bids:
-                bidDf.loc[idx] = b
-        
-        return bidDf
+        #for idx, bids in enumerate(bid):
+         #   for b in bids:
+          #      bidDf.loc[idx] = b
+        bidDf = pd.DataFrame.from_dict(bid, orient='index')
+        # 모니터 생기니깐 개좋다 너무 좋다~~~~~ 촤ㅣㅣ고당~~~ 너무 좋아유~ 너무 커서 좋아요 ~
+        return bidDf, bid
     
 """
 check, count = False, 0
